@@ -41,7 +41,7 @@ public class Main {
             if (input == 2)
                 TvoreniUctu(osoba, bank, bankaucty, ucty, penize);
             if (input == 3)
-                Posilani(bankaucty, ucty, penize);
+                Posilani(osoba, bank,bankaucty, ucty, penize);
             if (input == 4)
                 OdstraneniUctu(osoba, bank, bankaucty, ucty, penize);
             if (input == 5) {
@@ -69,68 +69,64 @@ public class Main {
         System.out.println("Rok narození:" + " " + osoba.getRoknarozeni());
         osoba.setClovek(1);
 
-        menu(osoba, bank, bankaucty, ucty, penize);
     }
 
     public static void TvoreniUctu(Osoba osoba, Bank bank, BankaUcty bankaucty, ArrayList<String> ucty, ArrayList<Integer> penize) {
         Scanner sc = new Scanner(System.in);
 
-         if (osoba.getClovek() == 1) {
-             System.out.println("Vyberte si banku");
-             System.out.println("1. Airbank");
-             System.out.println("2. Česká spořitelna");
-             System.out.println("3. Komerční banka");
+        if (osoba.getClovek() == 1) {
+            System.out.println("Vyberte si banku");
+            System.out.println("1. Airbank");
+            System.out.println("2. Česká spořitelna");
+            System.out.println("3. Komerční banka");
 
-             int input = sc.nextInt();
+            int input = sc.nextInt();
 
-             CisloUctu(bankaucty);
+            CisloUctu(bankaucty);
 
-             while (input < 4 && input != 0) {
-                 if (input == 1) {
-                     bankaucty.setCislobanky("0100");
-                     System.out.println("-------------------------");
-                     System.out.println("----Vytvořeno----");
-                     bank.setBank("Airbank");
-                     System.out.println("Banka" + " " + bank.getBank());
-                     System.out.println("Číslo účtu" + " " + bankaucty.getCislouctu() + "/" + bankaucty.getCislobanky());
-                     System.out.println("-------------------------");
-                     ucty.add(bank.getBank() + " " + "-" + " " + bankaucty.getCislouctu() + "/" + bankaucty.getCislobanky());
-                 }
-                 if (input == 2) {
-                     bankaucty.setCislobanky("0200");
-                     System.out.println("-------------------------");
-                     System.out.println("----Vytvořeno----");
-                     bank.setBank("Česká spořitelna");
-                     System.out.println("Banka" + " " + bank.getBank());
-                     System.out.println("Číslo účtu" + " " + bankaucty.getCislouctu() + "/" + bankaucty.getCislobanky());
-                     System.out.println("-------------------------");
-                     ucty.add(bank.getBank() + " " + "-" + " " + bankaucty.getCislouctu() + "/" + bankaucty.getCislobanky());
-                 }
+            while (input < 4 && input != 0) {
+                if (input == 1) {
+                    bankaucty.setCislobanky("0100");
+                    System.out.println("-------------------------");
+                    System.out.println("----Vytvořeno----");
+                    bank.setBank("Airbank");
+                    System.out.println("Banka" + " " + bank.getBank());
+                    System.out.println("Číslo účtu" + " " + bankaucty.getCislouctu() + "/" + bankaucty.getCislobanky());
+                    System.out.println("-------------------------");
+                    ucty.add(bank.getBank() + " " + "-" + " " + bankaucty.getCislouctu() + "/" + bankaucty.getCislobanky());
+                }
+                if (input == 2) {
+                    bankaucty.setCislobanky("0200");
+                    System.out.println("-------------------------");
+                    System.out.println("----Vytvořeno----");
+                    bank.setBank("Česká spořitelna");
+                    System.out.println("Banka" + " " + bank.getBank());
+                    System.out.println("Číslo účtu" + " " + bankaucty.getCislouctu() + "/" + bankaucty.getCislobanky());
+                    System.out.println("-------------------------");
+                    ucty.add(bank.getBank() + " " + "-" + " " + bankaucty.getCislouctu() + "/" + bankaucty.getCislobanky());
+                }
 
-                 if (input == 3) {
-                     bankaucty.setCislobanky("0300");
-                     System.out.println("-------------------------");
-                     System.out.println("----Vytvořeno----");
-                     bank.setBank("Komerční banka");
-                     System.out.println("Banka" + " " + bank.getBank());
-                     System.out.println("Číslo účtu" + " " + bankaucty.getCislouctu() + "/" + bankaucty.getCislobanky());
-                     System.out.println("-------------------------");
-                     ucty.add(bank.getBank() + " " + "-" + " " + bankaucty.getCislouctu() + "/" + bankaucty.getCislobanky());
-                 }
-                 break;
-             }
-         }
+                if (input == 3) {
+                    bankaucty.setCislobanky("0300");
+                    System.out.println("-------------------------");
+                    System.out.println("----Vytvořeno----");
+                    bank.setBank("Komerční banka");
+                    System.out.println("Banka" + " " + bank.getBank());
+                    System.out.println("Číslo účtu" + " " + bankaucty.getCislouctu() + "/" + bankaucty.getCislobanky());
+                    System.out.println("-------------------------");
+                    ucty.add(bank.getBank() + " " + "-" + " " + bankaucty.getCislouctu() + "/" + bankaucty.getCislobanky());
+                }
+                break;
+            }
+        }
         penize.add(1000);
         System.out.println("K novému účtu jsi dostal 1000 Kč");
-        menu(osoba, bank, bankaucty, ucty, penize);
     }
 
     public static void CisloUctu(BankaUcty bankaucty) {
         Random random = new Random();
 
-        int small = 100000000;
-        int big = 999999999;
-        int a = random.nextInt(big - small) + small;
+        int a = random.nextInt();
 
         bankaucty.setCislouctu(a);
     }
@@ -138,17 +134,15 @@ public class Main {
     public static void OdstraneniUctu(Osoba osoba, Bank bank, BankaUcty bankaucty, ArrayList<String> ucty, ArrayList<Integer> penize) {
         Scanner sc = new Scanner(System.in);
 
-            System.out.println("---Zadejte pozici učtu, který chcete odstranit---");
-            System.out.println(ucty);
-            int input = sc.nextInt();
-            System.out.println("Účet" + " " + ucty.get(input - 1) + " " + "byl zrušen.");
-            ucty.remove(input - 1);
-            System.out.println("Zbývající účty:" + ucty);
-
-        menu(osoba, bank, bankaucty, ucty, penize);
+        System.out.println("---Zadejte pozici učtu, který chcete odstranit---");
+        System.out.println(ucty);
+        int input = sc.nextInt();
+        System.out.println("Účet" + " " + ucty.get(input - 1) + " " + "byl zrušen.");
+        ucty.remove(input - 1);
+        System.out.println("Zbývající účty:" + ucty);
     }
 
-    public static void Posilani(BankaUcty bankaucty, ArrayList<String> ucty, ArrayList<Integer> penize) {
+    public static void Posilani(Osoba osoba, Bank bank, BankaUcty bankaucty, ArrayList<String> ucty, ArrayList<Integer> penize) {
         Scanner sc = new Scanner(System.in);
 
         if(bankaucty.getExistence() == 0) {
@@ -173,7 +167,7 @@ public class Main {
             int castka = sc.nextInt();
             if (castka > penize.get(input)) {
                 System.out.println("---Nemáte dostatek peněz---");
-                Posilani(bankaucty, ucty, penize);
+
             }
             penize.set(input - 1, penize.get(input - 1) - castka);
             penize.set(input2 -1, penize.get(input2 - 1) + castka);
